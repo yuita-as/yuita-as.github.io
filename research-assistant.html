@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research Assistant | Yuita Arum Sari</title>
+<meta name="description" content="Research assistant opportunities in the Vision-Language Systems research group, Universitas Brawijaya.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / <a href="research.html">Research</a> / Research assistant</p>
+      <h1>Research assistant</h1>
+      <p class="lead">The Vision-Language Systems group gives undergraduate students a pathway from learner to researcher — working on real projects, co-authoring papers, and presenting at conferences.</p>
+      <div class="actions"><a class="btn" href="mailto:yuita@ub.ac.id?subject=Research%20Assistant%20Application">Apply by email</a><a class="btn ghost" href="research.html#projects">See current projects</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap two-col">
+      <div class="stack">
+        <div class="card">
+          <h2>What research assistants do</h2>
+          <ul class="check">
+            <li>Collect, clean, and annotate image, speech, and text datasets</li>
+            <li>Build and evaluate computer-vision and deep-learning models</li>
+            <li>Turn experiments into undergraduate theses and co-authored papers</li>
+            <li>Present results at national and international conferences</li>
+            <li>Join competitions with research-based innovations</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Topics you can join</h2>
+          <div class="grid g2" style="margin-top:6px">
+            <div class="domain"><span class="num">01</span><div><h3>Smart Nutrition</h3><p class="small muted">Food recognition, leftover and calorie estimation.</p></div></div>
+            <div class="domain"><span class="num">02</span><div><h3>Biomedical Vision</h3><p class="small muted">Cataract screening, blood-cell and retinal imaging.</p></div></div>
+            <div class="domain"><span class="num">03</span><div><h3>Mental Health AI</h3><p class="small muted">Speech and text models for depression and PTSD screening.</p></div></div>
+            <div class="domain"><span class="num">04</span><div><h3>Assistive Intelligence</h3><p class="small muted">Accessible communication and inclusive technology.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <aside class="stack sticky">
+        <div class="card">
+          <h2>How to apply</h2>
+          <ol class="steps">
+            <li>Choose a topic that interests you.</li>
+            <li>Email <a href="mailto:yuita@ub.ac.id">yuita@ub.ac.id</a> with your CV, transcript, and a short note on why that topic.</li>
+            <li>Meet for a short discussion and a starter task.</li>
+          </ol>
+        </div>
+        <div class="card">
+          <span class="kicker">Track record</span>
+          <p class="small">Students in the group have presented at ICDSG 2025 — including a <b>Best Presenter</b> award — and won at <b>NESCO 3</b>.</p>
+          <a class="small" href="awards.html#students">Student achievements →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+  <section class="section" id="team">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Research assistants &amp; their achievements</h2><p>Members of the team and what they have achieved while doing research with the group.</p></div><span class="chip blue" id="team-count"></span></div>
+      <div class="grid g2" id="team-list"></div>
+    </div>
+  </section>
+</main>
+<script src="supervision-extra.js"></script>
+<script>
+(function () {
+  var d = window.RESEARCH_ASSISTANTS, e = window.svEsc;
+  var total = d.reduce(function (n, x) { return n + (x.achievements || []).length; }, 0);
+  document.getElementById('team-count').textContent = d.length ? d.length + ' members · ' + total + ' achievements' : '';
+  if (!d.length) { document.getElementById('team-count').remove(); document.getElementById('team-list').outerHTML = '<div class="list">' + window.svEmpty('Research assistants and their achievements will be listed here.') + '</div>'; return; }
+  document.getElementById('team-list').innerHTML = d.map(function (x) {
+    var initials = x.name.split(' ').map(function (w) { return w[0]; }).slice(0, 2).join('');
+    var ach = (x.achievements || []).map(function (a) {
+      return '<li><span class="when">' + e(a.year) + '</span><div><h3>' + (a.url ? '<a href="' + e(a.url) + '">' + e(a.title) + ' ↗</a>' : e(a.title)) + '</h3></div></li>';
+    }).join('');
+    return '<div class="card"><div class="award" style="margin-bottom:8px"><span class="icon blue" style="font-size:.85rem;font-weight:700">' + e(initials) + '</span><div><h3>' + e(x.name) + '</h3><p>' + e(x.period) + (x.topic ? ' · ' + e(x.topic) : '') + '</p></div></div>' + (ach ? '<ul class="tl">' + ach + '</ul>' : '<p class="small muted">Achievements will be added.</p>') + '</div>';
+  }).join('');
+})();
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

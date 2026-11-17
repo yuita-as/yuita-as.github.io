@@ -4,13 +4,13 @@
     ['bio.html', 'About'],
     ['research.html', 'Research'],
     ['publications.html', 'Publications'],
-    ['books.html', 'Books'],
     ['supervision.html', 'Supervision'],
     ['speaking.html', 'Talks'],
+    ['awards.html', 'Awards'],
     ['blog.html', 'Blog'],
     ['cv.html', 'CV']
   ];
-  var ALIAS = { 'project.html': 'research.html', 'code.html': 'research.html', 'papers.html': 'publications.html', 'post.html': 'blog.html' };
+  var ALIAS = { 'project.html': 'research.html', 'code.html': 'research.html', 'research-assistant.html': 'research.html', 'papers.html': 'publications.html', 'books.html': 'publications.html', 'post.html': 'blog.html', 'supervision-undergraduate.html': 'supervision.html', 'supervision-masters.html': 'supervision.html', 'supervision-competitions.html': 'supervision.html', 'supervision-internships.html': 'supervision.html' };
   var here = location.pathname.split('/').pop() || 'index.html';
   var active = ALIAS[here] || here;
 

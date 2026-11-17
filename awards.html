@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Awards &amp; Achievements | Yuita Arum Sari</title>
+<meta name="description" content="Awards, recognition, scholarships, and student achievements of Yuita Arum Sari, Ph.D.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / Awards</p>
+      <h1>Awards &amp; achievements</h1>
+      <p class="lead">Recognition for teaching, competitive scholarships, and achievements of supervised students.</p>
+      <nav class="subnav"><a href="#recognition">Recognition</a><a href="#scholarships">Scholarships</a><a href="#students">Student achievements</a></nav>
+    </div>
+  </section>
+
+  <section class="section" id="recognition">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Recognition</h2></div></div>
+      <div class="card award feature">
+        <span class="icon">🏆</span>
+        <div>
+          <span class="kicker">November 2026 · FILAFEST 2026 · BEM FILKOM UB</span>
+          <h3>Teaching Innovative Lecturer</h3>
+          <p>Awarded at FILAFEST 2026, the Student Executive Board’s appreciation event for FILKOM UB, through a student voting system.</p>
+          <a href="https://filkom.ub.ac.id/2026/11/12/apresiasi-dedikasi-bem-filkom-ub-gelar-filafest-2026-melalui-sistem-voting-mahasiswa/">Read the news ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="scholarships">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Scholarships</h2></div></div>
+      <div class="grid g2">
+        <div class="card award"><span class="icon blue">🎓</span><div><span class="kicker">2021–2024 · Japan</span><h3>MEXT Scholarship</h3><p>Japanese Government scholarship for doctoral study in Health Systems, Okayama University.</p></div></div>
+        <div class="card award"><span class="icon blue">🎓</span><div><span class="kicker">2014–2015 · Poland</span><h3>Erasmus+ Scholarship</h3><p>Master Mobility Program in Computer Science, Warsaw University of Technology.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="students">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Student achievements under my supervision</h2></div><a href="supervision-competitions.html">Competition supervision →</a></div>
+      <div class="grid g2" id="student-awards"></div>
+    </div>
+  </section>
+</main>
+<script src="supervision-extra.js"></script>
+<script>
+(function () {
+  var e = window.svEsc;
+  document.getElementById('student-awards').innerHTML = window.COMPETITIONS.map(function (x) {
+    return '<div class="card award"><span class="icon green">★</span><div><span class="kicker">' + e(x.date) + '</span><h3>' + e(x.result) + ' · ' + e(x.event) + '</h3><p>' + e(x.title) + '</p><p><b style="color:var(--text)">' + e(x.team) + '</b></p>' + (x.url ? '<a href="' + e(x.url) + '">News ↗</a>' : '') + '</div></div>';
+  }).join('');
+})();
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

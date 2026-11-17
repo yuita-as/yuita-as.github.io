@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Competition Supervision | Yuita Arum Sari</title>
+<meta name="description" content="Student competition and conference awards supervised by Yuita Arum Sari, Ph.D.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / <a href="supervision.html">Supervision</a> / Competitions</p>
+      <h1>Competition supervision</h1>
+      <p class="lead">Bimbingan lomba — student teams and presenters recognized in national competitions and international conferences.</p>
+      <nav class="tabs" aria-label="Supervision sections"><a href="supervision.html">Overview</a><a href="supervision-undergraduate.html">Undergraduate theses</a><a href="supervision-masters.html">Master’s theses</a><a href="supervision-competitions.html" class="on" aria-current="page">Competitions</a><a href="supervision-internships.html">Internships</a></nav>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap"><div class="stack" id="list"></div></div>
+  </section>
+</main>
+<script src="supervision-extra.js"></script>
+<script>
+(function () {
+  var e = window.svEsc, d = window.COMPETITIONS;
+  document.getElementById('list').innerHTML = d.length ? d.map(function (x) {
+    return '<div class="card award"><span class="icon">★</span><div><span class="kicker">' + e(x.date) + ' · ' + e(x.event) + '</span><h3>' + e(x.result) + ' — ' + e(x.title) + '</h3><p><b style="color:var(--text)">' + e(x.team) + '</b></p>' + (x.note ? '<p>' + e(x.note) + '</p>' : '') + (x.url ? '<a href="' + e(x.url) + '">Read the news ↗</a>' : '') + '</div></div>';
+  }).join('') : window.svEmpty('Competition records will be listed here.');
+})();
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

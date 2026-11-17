@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Master’s Thesis Supervision | Yuita Arum Sari</title>
+<meta name="description" content="Master’s thesis supervision by Yuita Arum Sari, Ph.D.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / <a href="supervision.html">Supervision</a> / Master’s theses</p>
+      <h1>Master’s thesis supervision</h1>
+      <p class="lead">Bimbingan tesis for graduate students.</p>
+      <nav class="tabs" aria-label="Supervision sections"><a href="supervision.html">Overview</a><a href="supervision-undergraduate.html">Undergraduate theses</a><a href="supervision-masters.html" class="on" aria-current="page">Master’s theses</a><a href="supervision-competitions.html">Competitions</a><a href="supervision-internships.html">Internships</a></nav>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap"><div class="list" id="list"></div></div>
+  </section>
+</main>
+<script src="supervision-extra.js"></script>
+<script>
+(function () {
+  var e = window.svEsc, d = window.MASTERS_THESES;
+  document.getElementById('list').innerHTML = d.length ? d.map(function (x) {
+    return '<div class="row sv-row"><span class="when">' + e(x.year) + '</span><div><h3>' + e(x.title) + '</h3><p class="who"><b>' + e(x.name) + '</b> · ' + e(x.program) + '</p></div><span class="end chip ' + (x.role === 'Primary' ? 'blue' : '') + '">' + e(x.role) + '</span></div>';
+  }).join('') : window.svEmpty('Master’s thesis supervision records will be listed here.');
+})();
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

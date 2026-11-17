@@ -211,6 +211,26 @@ a.card .more{margin-top:auto;padding-top:10px;font-size:.85rem;font-weight:600;c
 .empty{padding:28px;text-align:center;color:var(--muted)}
 .more-btn{display:block;margin:12px auto 0}
 
+/* tabs (supervision sub-pages) */
+.tabs{display:flex;gap:4px;margin-top:18px;border-bottom:1px solid var(--line);overflow-x:auto;margin-bottom:-25px}
+.tabs a{white-space:nowrap;font-size:.875rem;font-weight:600;color:var(--muted);padding:9px 12px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink);text-decoration:none}
+.tabs a.on{color:var(--accent);border-bottom-color:var(--accent)}
+.tabs a b{font-weight:500;color:var(--muted);margin-left:4px;font-size:.78rem}
+
+/* award / highlight */
+.award{display:flex;gap:14px;align-items:flex-start}
+.award .icon{flex:none;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--amber-soft);color:var(--amber);font-size:1.15rem;border:1px solid #fde7b0}
+.award .icon.blue{background:var(--accent-soft);color:var(--accent);border-color:#dbe3fe}
+.award .icon.green{background:var(--green-soft);color:var(--green);border-color:#c7f0dd}
+.award h3{margin-bottom:3px}
+.award p{font-size:.88rem;color:var(--muted);margin-bottom:4px}
+.award a{font-size:.82rem;font-weight:600}
+.feature{background:linear-gradient(135deg,#fff,var(--accent-soft));border-color:#dbe3fe}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.steps li{counter-increment:s;position:relative;padding-left:32px;font-size:.92rem}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:22px;height:22px;border-radius:6px;background:var(--accent-soft);color:var(--accent);font-size:.75rem;font-weight:700;display:grid;place-items:center}
+
 /* embeds */
 .embed-frame{width:100%;height:760px;border:1px solid var(--line);border-radius:12px;background:#fff}
 

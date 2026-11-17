@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Undergraduate Thesis Supervision | Yuita Arum Sari</title>
+<meta name="description" content="Searchable archive of undergraduate theses supervised by Yuita Arum Sari, Ph.D.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / <a href="supervision.html">Supervision</a> / Undergraduate theses</p>
+      <h1>Undergraduate thesis supervision</h1>
+      <p class="lead">Bimbingan skripsi from 2018 to 2026 across AI, computer vision, NLP, health informatics, information retrieval, and decision support.</p>
+      <nav class="tabs" aria-label="Supervision sections"><a href="supervision.html">Overview</a><a href="supervision-undergraduate.html" class="on" aria-current="page">Undergraduate theses</a><a href="supervision-masters.html">Master’s theses</a><a href="supervision-competitions.html">Competitions</a><a href="supervision-internships.html">Internships</a></nav>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="sv-stats" id="sv-stats"></div>
+      <div class="toolbar">
+        <label><span class="skip">Search</span><input id="search" type="search" placeholder="Search thesis title, student, or topic…"></label>
+        <select id="role-filter" aria-label="Supervision role"><option value="all">All roles</option><option value="Primary">Primary supervisor</option><option value="Co-supervisor">Co-supervisor</option></select>
+        <select id="sort" aria-label="Sort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">Title A–Z</option></select>
+      </div>
+      <div class="year-chips" id="year-chips"></div>
+      <p class="result-line" id="result-count"></p>
+      <div class="list" id="record-list"></div>
+      <button class="btn ghost more-btn" id="more" hidden>Show more</button>
+    </div>
+  </section>
+</main>
+<script src="supervision-data.js"></script>
+<script src="supervision.js"></script>
+<script src="layout.js"></script>
+</body>
+</html>

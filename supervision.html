@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Student Supervision | Yuita Arum Sari</title>
-<meta name="description" content="Searchable archive of undergraduate theses supervised by Yuita Arum Sari, Ph.D.">
+<meta name="description" content="Student supervision of Yuita Arum Sari, Ph.D.: undergraduate and master’s theses, competitions, and internships.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -14,27 +14,50 @@
   <section class="page-head">
     <div class="wrap">
       <p class="crumbs"><a href="index.html">Home</a> / Supervision</p>
-      <h1>Student supervision archive</h1>
-      <p class="lead">Undergraduate theses supervised from 2018 to 2026 across AI, computer vision, NLP, health informatics, information retrieval, and decision support.</p>
+      <h1>Student supervision</h1>
+      <p class="lead">Guiding students from first research question to publication, competition, and professional practice.</p>
+      <nav class="tabs" aria-label="Supervision sections"><a href="supervision.html" class="on" aria-current="page">Overview</a><a href="supervision-undergraduate.html">Undergraduate theses</a><a href="supervision-masters.html">Master’s theses</a><a href="supervision-competitions.html">Competitions</a><a href="supervision-internships.html">Internships</a></nav>
     </div>
   </section>
   <section class="section">
     <div class="wrap">
-      <div class="sv-stats" id="sv-stats"></div>
-      <div class="toolbar">
-        <label><span class="skip">Search</span><input id="search" type="search" placeholder="Search thesis title, student, or topic…"></label>
-        <select id="role-filter" aria-label="Supervision role"><option value="all">All roles</option><option value="Primary">Primary supervisor</option><option value="Co-supervisor">Co-supervisor</option></select>
-        <select id="sort" aria-label="Sort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">Title A–Z</option></select>
+      <div class="grid g4" id="sv-cards"></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Recent student achievements</h2></div><a href="supervision-competitions.html">All competitions →</a></div>
+      <div class="grid g2" id="sv-highlights"></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="banner">
+        <div><h2>Interested in joining the research group?</h2><p>Undergraduate students can grow as research assistants in the Vision-Language Systems group.</p></div>
+        <a class="btn" href="research-assistant.html">Research assistant →</a>
       </div>
-      <div class="year-chips" id="year-chips"></div>
-      <p class="result-line" id="result-count"></p>
-      <div class="list" id="record-list"></div>
-      <button class="btn ghost more-btn" id="more" hidden>Show more</button>
     </div>
   </section>
 </main>
 <script src="supervision-data.js"></script>
-<script src="supervision.js"></script>
+<script src="supervision-extra.js"></script>
+<script>
+(function () {
+  var e = window.svEsc;
+  var cards = [
+    ['supervision-undergraduate.html', 'Undergraduate theses', 'Bimbingan skripsi', (window.SUPERVISION_DATA || []).length, 'theses since 2018'],
+    ['supervision-masters.html', 'Master’s theses', 'Bimbingan tesis', window.MASTERS_THESES.length, 'theses'],
+    ['supervision-competitions.html', 'Competitions', 'Bimbingan lomba', window.COMPETITIONS.length, 'awards'],
+    ['supervision-internships.html', 'Internships', 'Bimbingan magang / PKL', window.INTERNSHIPS.length, 'students']
+  ];
+  document.getElementById('sv-cards').innerHTML = cards.map(function (c) {
+    return '<a class="card" href="' + c[0] + '"><span class="kicker">' + c[2] + '</span><h3>' + c[1] + '</h3><p class="metric" style="border:0;padding:0;background:none"><b>' + (c[3] || '—') + '</b><span>' + (c[3] ? c[4] : 'records coming soon') + '</span></p><span class="more">Open →</span></a>';
+  }).join('');
+  document.getElementById('sv-highlights').innerHTML = window.COMPETITIONS.slice(0, 2).map(function (x) {
+    return '<div class="card award"><span class="icon">★</span><div><span class="kicker">' + e(x.date) + '</span><h3>' + e(x.result) + ' · ' + e(x.event) + '</h3><p>' + e(x.title) + '</p><p><b style="color:var(--text)">' + e(x.team) + '</b></p>' + (x.url ? '<a href="' + e(x.url) + '">News ↗</a>' : '') + '</div></div>';
+  }).join('');
+})();
+</script>
 <script src="layout.js"></script>
 </body>
 </html>
