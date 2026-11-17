@@ -15,33 +15,23 @@
     <div class="wrap">
       <p class="crumbs"><a href="index.html">Home</a> / Awards</p>
       <h1>Awards &amp; achievements</h1>
-      <p class="lead">Recognition for teaching, competitive scholarships, and achievements of supervised students.</p>
-      <nav class="subnav"><a href="#recognition">Recognition</a><a href="#scholarships">Scholarships</a><a href="#students">Student achievements</a></nav>
+      <p class="lead">Recognition for teaching, research, publication, and supervision — from faculty to international level — and achievements of supervised students.</p>
+      <nav class="subnav"><a href="#awards">All awards</a><a href="#students">Student achievements</a></nav>
     </div>
   </section>
 
-  <section class="section" id="recognition">
+  <section class="section">
     <div class="wrap">
-      <div class="section-head"><div><h2>Recognition</h2></div></div>
-      <div class="card award feature">
-        <span class="icon">🏆</span>
-        <div>
-          <span class="kicker">November 2026 · FILAFEST 2026 · BEM FILKOM UB</span>
-          <h3>Teaching Innovative Lecturer</h3>
-          <p>Awarded at FILAFEST 2026, the Student Executive Board’s appreciation event for FILKOM UB, through a student voting system.</p>
-          <a href="https://filkom.ub.ac.id/2026/11/12/apresiasi-dedikasi-bem-filkom-ub-gelar-filafest-2026-melalui-sistem-voting-mahasiswa/">Read the news ↗</a>
-        </div>
-      </div>
+      <div class="card award feature" id="featured"></div>
     </div>
   </section>
 
-  <section class="section" id="scholarships">
+  <section class="section" id="awards">
     <div class="wrap">
-      <div class="section-head"><div><h2>Scholarships</h2></div></div>
-      <div class="grid g2">
-        <div class="card award"><span class="icon blue">🎓</span><div><span class="kicker">2021–2024 · Japan</span><h3>MEXT Scholarship</h3><p>Japanese Government scholarship for doctoral study in Health Systems, Okayama University.</p></div></div>
-        <div class="card award"><span class="icon blue">🎓</span><div><span class="kicker">2014–2015 · Poland</span><h3>Erasmus+ Scholarship</h3><p>Master Mobility Program in Computer Science, Warsaw University of Technology.</p></div></div>
-      </div>
+      <div class="section-head"><div><h2>All awards &amp; recognition</h2></div></div>
+      <div class="sv-stats" id="levels"></div>
+      <div class="year-chips" id="level-chips"></div>
+      <div class="list" id="award-list"></div>
     </div>
   </section>
 
@@ -52,10 +42,41 @@
     </div>
   </section>
 </main>
+<script src="awards-data.js"></script>
 <script src="supervision-extra.js"></script>
 <script>
 (function () {
-  var e = window.svEsc;
+  var e = window.svEsc, A = window.AWARDS, current = 'all';
+  var LEVELS = ['International', 'National', 'University', 'Faculty'];
+  var COLOR = { International: 'blue', National: 'green', University: 'amber', Faculty: '' };
+  var n = function (l) { return A.filter(function (a) { return a.level === l; }).length; };
+
+  var f = A.filter(function (a) { return a.featured; })[0];
+  if (f) document.getElementById('featured').innerHTML = '<span class="icon">🏆</span><div><span class="kicker">' + e(f.year) + ' · Latest recognition</span><h3>' + e(f.title) + '</h3><p>' + e(f.issuer) + '</p>' + (f.url ? '<a href="' + e(f.url) + '">Read the news ↗</a>' : '') + '</div>';
+  else document.getElementById('featured').closest('.section').remove();
+
+  document.getElementById('levels').innerHTML = LEVELS.map(function (l) {
+    return '<div class="metric"><b>' + n(l) + '</b><span>' + l + ' level</span></div>';
+  }).join('');
+
+  function chips() {
+    document.getElementById('level-chips').innerHTML = ['all'].concat(LEVELS).filter(function (l) { return l === 'all' || n(l); }).map(function (l) {
+      return '<button data-l="' + l + '"' + (l === current ? ' class="on"' : '') + '>' + (l === 'all' ? 'All' : l) + '<b>' + (l === 'all' ? A.length : n(l)) + '</b></button>';
+    }).join('');
+  }
+  function list() {
+    var rows = A.filter(function (a) { return current === 'all' || a.level === current; })
+      .sort(function (a, b) { return b.year.localeCompare(a.year); });
+    document.getElementById('award-list').innerHTML = rows.map(function (a) {
+      return '<div class="row"><span class="when">' + e(a.year) + '</span><div><h3>' + e(a.title) + '</h3><p>' + e(a.issuer) + '</p></div>' +
+        '<span class="end">' + (a.url ? '<a href="' + e(a.url) + '" style="margin-right:10px">News ↗</a>' : '') + '<span class="chip ' + COLOR[a.level] + '">' + e(a.level) + '</span></span></div>';
+    }).join('');
+  }
+  document.getElementById('level-chips').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button'); if (!b) return; current = b.dataset.l; chips(); list();
+  });
+  chips(); list();
+
   document.getElementById('student-awards').innerHTML = window.COMPETITIONS.map(function (x) {
     return '<div class="card award"><span class="icon green">★</span><div><span class="kicker">' + e(x.date) + '</span><h3>' + e(x.result) + ' · ' + e(x.event) + '</h3><p>' + e(x.title) + '</p><p><b style="color:var(--text)">' + e(x.team) + '</b></p>' + (x.url ? '<a href="' + e(x.url) + '">News ↗</a>' : '') + '</div></div>';
   }).join('');

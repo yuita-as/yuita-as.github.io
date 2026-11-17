@@ -16,6 +16,7 @@ Upload every file (including the `assets` folder) to the repository root, then *
 | Menu & footer links (all pages) | `layout.js` |
 | Colors, spacing, fonts | `styles.css` (variables at the top) |
 | Research projects (home, research and project pages) | `projects-data.js` — only the funding *scheme* is shown, never amounts |
+| Awards & recognition | `awards-data.js` |
 | Undergraduate thesis archive | `supervision-data.js` (student NIMs are not stored) |
 | Master's theses, competitions, internships | `supervision-extra.js` |
 | Research assistants: name, period, topic, and achievements while in the team | `supervision-extra.js` → `RESEARCH_ASSISTANTS` |
