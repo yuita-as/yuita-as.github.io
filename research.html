@@ -1,1 +1,60 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="compact.css"></head><body data-page="research"><script src="content-data.js"></script><script src="content-page.js"></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research | Yuita Arum Sari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / Research</p>
+      <h1>Six connected domains, one human-centered mission</h1>
+      <p class="lead">Research spanning intelligent perception, health, nutrition, robotics, and accessible communication.</p>
+      <nav class="subnav"><a href="#roadmap">Roadmap</a><a href="#areas">Research areas</a><a href="#projects">Current projects</a><a href="code.html">Code &amp; data</a></nav>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Research roadmap</h2><p>From foundational AI methods to human-centered applications.</p></div></div>
+      <figure class="roadmap" style="margin:0"><img src="assets/research-roadmap-blue.png" alt="Research roadmap: Smart Nutrition, BRONE Humanoid Vision Robot, Mental Health Computing, Patient Activity Intelligence, AI Cataract Screening, and Assistive Communication Systems around a human-centered AI core" loading="lazy"></figure>
+      <div class="chips" style="margin-top:12px">
+        <span class="chip">Smart Nutrition</span><span class="chip">BRONE Humanoid Vision Robot</span><span class="chip">Mental Health Computing</span><span class="chip">Patient Activity Intelligence</span><span class="chip">AI Cataract Screening</span><span class="chip">Assistive Communication Systems</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="areas">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Research areas</h2></div></div>
+      <div class="grid g4">
+        <div class="card domain"><span class="num">01</span><div><h3>Smart Nutrition</h3><p>Food recognition, portion and leftover estimation, ingredient prediction, dietary support.</p></div></div>
+        <div class="card domain"><span class="num">02</span><div><h3>Biomedical Vision</h3><p>Cataract screening, blood-cell quantification, retinal imaging, clinical image understanding.</p></div></div>
+        <div class="card domain"><span class="num">03</span><div><h3>Mental Health AI</h3><p>Speech, text, and multimodal models for depression, dysarthria, and PTSD screening.</p></div></div>
+        <div class="card domain"><span class="num">04</span><div><h3>Assistive Intelligence</h3><p>Human-aware perception, smart mobility, and accessible communication systems.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Current projects</h2><p>Each project page explains the problem, approach, expected impact, and connected student research.</p></div></div>
+      <div class="grid g2" id="project-cards"></div>
+    </div>
+  </section>
+</main>
+<script src="projects-data.js"></script>
+<script>
+document.getElementById('project-cards').innerHTML = Object.entries(window.PROJECTS).map(function (e) {
+  var p = e[1];
+  return '<a class="card" href="project.html?id=' + e[0] + '"><span class="kicker">' + p.year + ' · ' + p.area + '</span><h3>' + p.title + '</h3><p>' + p.summary + '</p><div class="chips">' + p.tags.map(function (t) { return '<span class="chip">' + t + '</span>'; }).join('') + '</div><span class="more">Project details →</span></a>';
+}).join('');
+</script>
+<script src="layout.js"></script>
+</body>
+</html>

@@ -1,1 +1,68 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project | Yuita Arum Sari</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body><header><nav class="wrap"><a class="brand" href="index.html"><span>YAS</span><b>Yuita Arum Sari</b></a><button class="menu" aria-expanded="false">Menu</button><div class="navlinks"><a href="index.html#research">Research</a><a href="index.html#projects">Projects</a><a href="supervision.html">Supervision</a><a class="pill" href="index.html#contact">Contact</a></div></nav></header><main><section class="project-hero"><div class="wrap"><p class="breadcrumbs"><a href="index.html">Home</a> / <a href="index.html#projects">Projects</a></p><p class="eyebrow" id="project-kicker"></p><h1 id="project-title"></h1><p id="project-summary"></p></div></section><section class="section"><div class="wrap project-body"><article><h2>The challenge</h2><p id="project-problem"></p><h3>Research approach</h3><ul id="project-methods"></ul><h3>Expected impact</h3><p id="project-impact"></p><h3>Connected student research & contributors</h3><div class="related" id="project-students"></div></article><aside class="factbox"><p class="eyebrow">Project facts</p><div><span>Period</span><b id="fact-year"></b></div><div><span>Funding source</span><b id="fact-funding"></b></div><div><span>Research funding</span><b id="fact-budget"></b></div><div><span>Domain</span><b id="fact-domain"></b></div><a class="button" href="index.html#contact">Discuss collaboration</a></aside></div></section></main><footer><div class="wrap"><p>© <span id="year"></span> Yuita Arum Sari</p><a href="index.html#projects">All projects ↑</a></div></footer><script src="projects-data.js"></script><script src="project.js"></script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project | Yuita Arum Sari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / <a href="research.html#projects">Projects</a></p>
+      <span class="kicker" id="p-kicker"></span>
+      <h1 id="p-title"></h1>
+      <p class="lead" id="p-summary"></p>
+      <div class="chips" id="p-tags" style="margin-top:12px"></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap two-col">
+      <div class="stack">
+        <div class="card"><h2>The challenge</h2><p id="p-problem"></p></div>
+        <div class="card"><h2>Research approach</h2><ul class="check" id="p-methods"></ul></div>
+        <div class="card"><h2>Expected impact</h2><p id="p-impact"></p></div>
+        <div class="card" id="p-students-card"><h2>Connected student research</h2><ul class="check" id="p-students"></ul></div>
+      </div>
+      <aside class="stack sticky">
+        <div class="card facts">
+          <div><span>Period</span><b id="f-year"></b></div>
+          <div><span>Funding scheme</span><b id="f-funding"></b></div>
+          <div><span>Domain</span><b id="f-domain"></b></div>
+          <a class="btn" href="mailto:yuita@ub.ac.id">Discuss collaboration</a>
+        </div>
+        <div class="card"><span class="kicker">Other projects</span><nav class="switcher" id="p-switch"></nav></div>
+      </aside>
+    </div>
+  </section>
+</main>
+<script src="projects-data.js"></script>
+<script>
+(function () {
+  var P = window.PROJECTS, id = new URLSearchParams(location.search).get('id');
+  if (!P[id]) id = Object.keys(P)[0];
+  var p = P[id], $ = function (i) { return document.getElementById(i); };
+  document.title = p.title + ' | Yuita Arum Sari';
+  $('p-kicker').textContent = p.year + ' · ' + p.area;
+  $('p-title').textContent = p.title;
+  $('p-summary').textContent = p.summary;
+  $('p-problem').textContent = p.problem;
+  $('p-impact').textContent = p.impact;
+  $('f-year').textContent = p.year;
+  $('f-funding').textContent = p.funding;
+  $('f-domain').textContent = p.domain;
+  $('p-tags').innerHTML = p.tags.map(function (t) { return '<span class="chip blue">' + t + '</span>'; }).join('');
+  $('p-methods').innerHTML = p.methods.map(function (m) { return '<li>' + m + '</li>'; }).join('');
+  if (p.students.length) $('p-students').innerHTML = p.students.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+  else $('p-students-card').hidden = true;
+  $('p-switch').innerHTML = Object.keys(P).map(function (k) {
+    return '<a href="project.html?id=' + k + '"' + (k === id ? ' class="current"' : '') + '>' + P[k].title + '</a>';
+  }).join('');
+})();
+</script>
+<script src="layout.js"></script>
+</body>
+</html>
