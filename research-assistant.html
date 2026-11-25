@@ -1,22 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Research Assistant | Yuita Arum Sari</title>
 <meta name="description" content="Research assistant opportunities in the Vision-Language Systems research group, Universitas Brawijaya.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com/"><link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== Research-assistant section (self-contained) ===== */
+  #team{--ra-blue:#2450b3;--ra-green:#1f8a5b;--ra-orange:#b5651d;--ra-gold:#a67c00;--ra-line:rgba(127,127,127,.22);--ra-soft:rgba(127,127,127,.07)}
+  .ra-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 18px}
+  .ra-summary{display:flex;flex-wrap:wrap;gap:8px}
+  .ra-summary span{font-size:.82rem;padding:5px 12px;border-radius:999px;border:1px solid var(--ra-line)}
+  .ra-summary b{font-weight:700}
+  .ra-views{display:inline-flex;border:1px solid var(--ra-line);border-radius:999px;padding:3px}
+  .ra-views button,.ra-filter button{font:inherit;font-size:.82rem;padding:6px 14px;border-radius:999px;cursor:pointer;border:0;background:transparent;color:inherit}
+  .ra-views button[aria-pressed="true"]{background:var(--ra-blue);color:#fff}
+  .ra-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+  .ra-filter{display:flex;flex-wrap:wrap;gap:6px}
+  .ra-filter button{border:1px solid var(--ra-line)}
+  .ra-filter button[aria-pressed="true"]{border-color:var(--ra-blue);color:var(--ra-blue);font-weight:600}
+  .ra-search{font:inherit;font-size:.85rem;padding:7px 12px;border-radius:999px;border:1px solid var(--ra-line);background:transparent;color:inherit;min-width:220px;margin-left:auto}
+
+  /* type badges */
+  .ra-badge{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .b-hki{background:#e8eefb;color:var(--ra-blue)}.b-paten{background:#fbefe3;color:var(--ra-orange)}
+  .b-pub{background:#e3f4ec;color:var(--ra-green)}.b-award{background:#fbf3dc;color:var(--ra-gold)}
+  .ra-status{font-size:.75rem;opacity:.7;white-space:nowrap}
+
+  /* avatars */
+  .ra-av{flex:0 0 auto;border-radius:50%;object-fit:cover;display:inline-flex;align-items:center;justify-content:center;font-weight:700;background:#e8eefb;color:var(--ra-blue)}
+  .ra-av.s{width:28px;height:28px;font-size:.68rem}.ra-av.m{width:44px;height:44px;font-size:.85rem}.ra-av.l{width:64px;height:64px;font-size:1.1rem}
+
+  /* VIEW 1 — compact list per person */
+  .ra-compact{border:1px solid var(--ra-line);border-radius:14px;overflow:hidden}
+  .ra-row{border-top:1px solid var(--ra-line)}.ra-row:first-child{border-top:0}
+  .ra-row summary{list-style:none;display:grid;grid-template-columns:auto 1fr auto auto;gap:14px;align-items:center;padding:12px 16px;cursor:pointer}
+  .ra-row summary::-webkit-details-marker{display:none}
+  .ra-row summary:hover{background:var(--ra-soft)}
+  .ra-name{font-weight:600;line-height:1.3}.ra-sub{font-size:.8rem;opacity:.7}
+  .ra-counts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .ra-chev{transition:transform .2s;opacity:.5}.ra-row[open] .ra-chev{transform:rotate(90deg)}
+  .ra-row ol{margin:0;padding:4px 16px 14px 74px;display:flex;flex-direction:column;gap:8px}
+  .ra-row li{font-size:.88rem;line-height:1.45}
+  .ra-row li .ra-badge{margin-right:6px;vertical-align:1px}
+
+  /* VIEW 2 — table of outputs */
+  .ra-tablewrap{overflow-x:auto;border:1px solid var(--ra-line);border-radius:14px}
+  .ra-table{width:100%;border-collapse:collapse;font-size:.88rem}
+  .ra-table th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;opacity:.7;padding:12px 14px;border-bottom:1px solid var(--ra-line);white-space:nowrap}
+  .ra-table td{padding:12px 14px;border-top:1px solid var(--ra-line);vertical-align:top}
+  .ra-table tr:first-child td{border-top:0}
+  .ra-table tbody tr:hover{background:var(--ra-soft)}
+  .ra-table .t-title{font-weight:600;line-height:1.4}.ra-table .t-venue{font-size:.8rem;opacity:.7;margin-top:3px}
+  .ra-people{display:flex;flex-wrap:wrap;gap:4px 10px}
+  .ra-person{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;white-space:nowrap}
+  @media (max-width:720px){
+    .ra-table thead{display:none}.ra-table,.ra-table tbody,.ra-table tr,.ra-table td{display:block;width:100%}
+    .ra-table tr{border-top:1px solid var(--ra-line);padding:6px 0}.ra-table td{border:0;padding:6px 14px}
+    .ra-row summary{grid-template-columns:auto 1fr auto}.ra-counts{grid-column:2/4;justify-content:flex-start}
+    .ra-row ol{padding-left:16px}.ra-search{margin-left:0;flex:1}
+  }
+
+  /* VIEW 3 — cards */
+  .ra-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+  .ra-card{display:flex;flex-direction:column;gap:14px}
+  .ra-head{display:flex;align-items:center;gap:14px}
+  .ra-head h3{margin:0 0 2px;font-size:1.05rem}
+  .ra-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .ra-list li{padding:10px 12px;border-radius:10px;background:var(--ra-soft);font-size:.88rem;line-height:1.4}
+  .ra-list li .ra-badge{margin-bottom:4px}
+  .ra-lect{font-size:.78rem;opacity:.7;margin-top:4px}
+  .ra-empty{padding:28px;text-align:center;opacity:.65;border:1px dashed var(--ra-line);border-radius:14px}
+</style>
 </head>
 <body>
+<header class="site-header"><a class="skip" href="#main">Skip to content</a><div class="wrap"><a class="brand" href="https://yuita-as.github.io/index.html"><i>YAS</i><span>Yuita Arum Sari<small>Informatics · Universitas Brawijaya</small></span></a><button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button><nav class="nav" id="site-nav"><a href="https://yuita-as.github.io/bio.html">About</a><a href="https://yuita-as.github.io/research.html" class="active" aria-current="page">Research</a><a href="https://yuita-as.github.io/publications.html">Publications</a><a href="https://yuita-as.github.io/supervision.html">Supervision</a><a href="https://yuita-as.github.io/speaking.html">Talks</a><a href="https://yuita-as.github.io/awards.html">Awards</a><a href="https://yuita-as.github.io/blog.html">Blog</a><a href="https://yuita-as.github.io/cv.html">CV</a><a class="cta" href="https://yuita-as.github.io/index.html#contact">Contact</a></nav></div></header>
 <main id="main">
   <section class="page-head">
     <div class="wrap">
-      <p class="crumbs"><a href="index.html">Home</a> / <a href="research.html">Research</a> / Research assistant</p>
+      <p class="crumbs"><a href="https://yuita-as.github.io/index.html">Home</a> / <a href="https://yuita-as.github.io/research.html">Research</a> / Research assistant</p>
       <h1>Research assistant</h1>
       <p class="lead">The Vision-Language Systems group gives undergraduate students a pathway from learner to researcher — working on real projects, co-authoring papers, and presenting at conferences.</p>
-      <div class="actions"><a class="btn" href="mailto:yuita@ub.ac.id?subject=Research%20Assistant%20Application">Apply by email</a><a class="btn ghost" href="research.html#projects">See current projects</a></div>
+      <div class="actions"><a class="btn" href="mailto:yuita@ub.ac.id?subject=Research%20Assistant%20Application">Apply by email</a><a class="btn ghost" href="https://yuita-as.github.io/research.html#projects">See current projects</a></div>
     </div>
   </section>
 
@@ -55,34 +122,163 @@
         <div class="card">
           <span class="kicker">Track record</span>
           <p class="small">Students in the group have presented at ICDSG 2025 — including a <b>Best Presenter</b> award — and won at <b>NESCO 3</b>.</p>
-          <a class="small" href="awards.html#students">Student achievements →</a>
+          <a class="small" href="https://yuita-as.github.io/awards.html#students">Student achievements →</a>
         </div>
       </aside>
     </div>
   </section>
+
   <section class="section" id="team">
     <div class="wrap">
-      <div class="section-head"><div><h2>Research assistants &amp; their achievements</h2><p>Members of the team and what they have achieved while doing research with the group.</p></div><span class="chip blue" id="team-count"></span></div>
-      <div class="grid g2" id="team-list"></div>
+      <div class="section-head"><div><h2>Research assistants &amp; their achievements</h2><p>Members of the team and the intellectual property, patents, and publications they have produced while doing research with the group.</p></div></div>
+      <div class="ra-bar">
+        <div class="ra-summary" id="ra-summary"></div>
+        <div class="ra-views" id="ra-views" role="group" aria-label="Choose view">
+          <button type="button" data-v="compact" aria-pressed="true">By person</button>
+          <button type="button" data-v="table" aria-pressed="false">Table</button>
+          <button type="button" data-v="cards" aria-pressed="false">Cards</button>
+        </div>
+      </div>
+      <div class="ra-tools">
+        <div class="ra-filter" id="ra-filter" role="group" aria-label="Filter by output type"></div>
+        <input class="ra-search" id="ra-search" type="search" placeholder="Search name or title…" aria-label="Search name or title">
+      </div>
+      <div id="ra-out"></div>
     </div>
   </section>
 </main>
-<script src="supervision-extra.js"></script>
+
 <script>
+/* =====================================================================
+   CARA MENGISI DATA
+   ---------------------------------------------------------------------
+   1) MAHASISWA — satu baris per orang.
+      [ "kode",  "Nama lengkap",  "Prodi",  "Topik",  "foto (boleh kosong)" ]
+      - kode  : singkatan unik, dipakai di tabel KARYA (tanpa spasi)
+      - foto  : mis. "img/ra/wahyu.jpg"; kosongkan "" untuk tampil inisial
+      - NIM sengaja TIDAK dicantumkan (halaman ini publik)
+
+   2) KARYA — satu baris per HKI / paten / publikasi / penghargaan.
+      [ "jenis", "status", "tahun", "Judul", "kode mahasiswa (pisah spasi)", "venue/keterangan", "link", "dosen" ]
+      - jenis : hki | paten | pub | award
+      - status: mis. Copyright, Submitted, Filed, Granted, Accepted, Published, 1st Place
+      - dosen : nama dosen yang terlibat, pisah dengan koma (boleh kosong)
+      - kolom yang tidak ada isinya cukup ""
+   ===================================================================== */
+
+var MAHASISWA = [
+//  kode        nama                                          prodi                  topik                     foto
+  ["wahyu",    "Wahyu Dwi Laksana Putri",                    "Teknik Informatika",  "Smart Nutrition",        ""],
+  ["alvian",   "Achmad Alvian Prasetio",                     "Teknik Informatika",  "Smart Nutrition",        ""],
+  ["michael",  "Michael Aditya Patria Wijanarko",            "Teknik Komputer",     "Smart Nutrition",        ""],
+  ["farel",    "Farel Paris Hutajulu",                       "Teknik Komputer",     "Smart Nutrition",        ""],
+  ["andys",    "Andys Deni Satria",                          "Teknik Komputer",     "Smart Nutrition",        ""],
+  ["nico",     "Nico Arya Divano",                           "",                    "Smart Nutrition",        ""],
+  ["sulthon",  "Muhammad Sulthon Aulia Wijaya",              "",                    "Smart Nutrition",        ""],
+  ["ghazy",    "Muhammad Ghazy Humaidi",                     "",                    "Smart Nutrition",        ""],
+  ["zuhdi",    "Zuhdi Arif Azizi",                           "",                    "Smart Nutrition",        ""],
+  ["hudzaifah","Hudzaifah",                                  "Teknik Informatika",  "",                       ""],
+  ["dito",     "Mukhammad Dito Okviansyah Ramadhan Putra",   "Teknik Informatika",  "",                       ""]
+];
+
+var KARYA = [
+//  jenis    status       tahun   judul                                                                                                   mahasiswa                              venue / keterangan                                                                          link  dosen
+  ["paten", "Filed",     "",     "Kotak Gizi Cerdas Generasi 2: Sistem Pengukuran Berat Otomatis dan Analisis Sisa Makanan Berbasis Citra Digital", "andys michael farel alvian wahyu", "Patent application",                                                                        "",   ""],
+  ["hki",   "Copyright", "",     "Aplikasi Kotak Gizi Cerdas: Aplikasi Desktop Akuisisi Citra",                                           "wahyu alvian",                        "",                                                                                          "",   "Yuita Arum Sari, Sigit Adinugroho, Yudi Arimba Wani"],
+  ["hki",   "Copyright", "",     "MakanKita: Aplikasi Berbasis Citra untuk Identifikasi Makanan dan Rekomendasi Resep Rendah Kalori",     "nico sulthon ghazy zuhdi",            "",                                                                                          "",   "Yuita Arum Sari, Sigit Adinugroho, Yudi Arimba Wani"],
+  ["hki",   "Copyright", "",     "NutriNusa: Sistem Cerdas Berbasis Web untuk Analisis Konsumsi dan Estimasi Asupan Gizi Makanan Menggunakan Pengolahan Citra Digital", "alvian wahyu", "",                                                                             "",   "Yuita Arum Sari, Sigit Adinugroho, Yudi Arimba Wani"],
+  ["hki",   "Copyright", "",     "Program Firmware ESP32 untuk Mengukur Berat Makanan Kotak Gizi Cerdas Generasi 2",                      "michael farel andys wahyu alvian",    "",                                                                                          "",   "Wijaya Kurniawan (lead), Yuita Arum Sari, Sigit Adinugroho, Jaya Mahar Maligan, Yudi Arimba Wani"],
+  ["hki",   "Copyright", "",     "Panduan Kotak Gizi Cerdas Generasi 2",                                                                  "michael farel andys wahyu alvian",    "",                                                                                          "",   "Yuita Arum Sari (lead), Wijaya Kurniawan, Sigit Adinugroho, Jaya Mahar Maligan, Yudi Arimba Wani"],
+  ["hki",   "Submitted", "",     "Panduan Praktis Pembelajaran Digital Branding UMKM Melalui Pemanfaatan Teknologi Berbasis AI pada Pelaku Usaha Batik di Banyuwangi", "hudzaifah dito", "",                                                                             "",   ""],
+  ["pub",   "Accepted",  "2027", "A Late-Fusion Multimodal Architecture for Indonesian Food Calorie Prediction Using Images and Ingredient Lists",     "wahyu alvian",                        "Conference · 2027 2nd International Conference on Advances in Artificial Intelligence and Machine Learning (AAIML 2027), Tokyo, Japan",  "",   "Yuita Arum Sari, Agus Wahyu Widodo"],
+  ["pub",   "Accepted",  "2027", "Transformer-Based Late Fusion Using Images and Ingredients for Indonesian Food Calorie Prediction",     "wahyu alvian",                        "Conference · 2027 2nd International Conference on Advances in Artificial Intelligence and Machine Learning (AAIML 2027), Tokyo, Japan",  "",   "Yuita Arum Sari, Agus Wahyu Widodo"]
+];
+
+/* ===================== TAMPILAN — tidak perlu diedit ===================== */
 (function () {
-  var d = window.RESEARCH_ASSISTANTS, e = window.svEsc;
-  var total = d.reduce(function (n, x) { return n + (x.achievements || []).length; }, 0);
-  document.getElementById('team-count').textContent = d.length ? d.length + ' members · ' + total + ' achievements' : '';
-  if (!d.length) { document.getElementById('team-count').remove(); document.getElementById('team-list').outerHTML = '<div class="list">' + window.svEmpty('Research assistants and their achievements will be listed here.') + '</div>'; return; }
-  document.getElementById('team-list').innerHTML = d.map(function (x) {
-    var initials = x.name.split(' ').map(function (w) { return w[0]; }).slice(0, 2).join('');
-    var ach = (x.achievements || []).map(function (a) {
-      return '<li><span class="when">' + e(a.year) + '</span><div><h3>' + (a.url ? '<a href="' + e(a.url) + '">' + e(a.title) + ' ↗</a>' : e(a.title)) + '</h3></div></li>';
-    }).join('');
-    return '<div class="card"><div class="award" style="margin-bottom:8px"><span class="icon blue" style="font-size:.85rem;font-weight:700">' + e(initials) + '</span><div><h3>' + e(x.name) + '</h3><p>' + e(x.period) + (x.topic ? ' · ' + e(x.topic) : '') + '</p></div></div>' + (ach ? '<ul class="tl">' + ach + '</ul>' : '<p class="small muted">Achievements will be added.</p>') + '</div>';
-  }).join('');
+  var TYPES = { hki:["IP / HKI","IP / HKI"], paten:["Patent","Patents"], pub:["Publication","Publications"], award:["Award","Awards"] };
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+  function ini(n){ return n.split(/\s+/).filter(Boolean).map(function(w){return w[0];}).slice(0,2).join("").toUpperCase(); }
+
+  var M = {}, people = MAHASISWA.map(function(r){
+    var p = { id:r[0], name:r[1], prodi:r[2], topic:r[3], photo:r[4], outs:[] }; M[p.id] = p; return p; });
+  var outs = KARYA.map(function(r){
+    var o = { type:r[0], status:r[1], year:r[2], title:r[3], team:r[4].split(/\s+/).filter(Boolean), venue:r[5], url:r[6], lect:(r[7]||"").split(",").map(function(x){return x.trim();}).filter(Boolean) };
+    o.team.forEach(function(id){ if (M[id]) M[id].outs.push(o); else console.warn("Kode anggota tidak dikenal:", id); });
+    return o; });
+  people.sort(function(a,b){ return b.outs.length-a.outs.length || a.name.localeCompare(b.name); });
+
+  function av(p,size){ return p.photo ? '<img class="ra-av '+size+'" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'" loading="lazy">'
+                                      : '<span class="ra-av '+size+'" aria-hidden="true">'+esc(ini(p.name))+'</span>'; }
+  function badge(t){ return '<span class="ra-badge b-'+t+'">'+TYPES[t][0]+'</span>'; }
+  function stat(o){ return [o.status,o.year].filter(Boolean).map(esc).join(' · '); }
+  function ttl(o){ return o.url ? '<a href="'+esc(o.url)+'">'+esc(o.title)+' ↗</a>' : esc(o.title); }
+  function lect(o,cls){ return o.lect.length ? '<div class="'+cls+'">Lecturers: '+o.lect.map(esc).join(', ')+'</div>' : ''; }
+  function sub(p){ return [p.prodi,p.topic].filter(Boolean).map(esc).join(' · '); }
+
+  var counts = {}; outs.forEach(function(o){ counts[o.type]=(counts[o.type]||0)+1; });
+  var present = Object.keys(TYPES).filter(function(t){ return counts[t]; });
+  document.getElementById("ra-summary").innerHTML = '<span><b>'+people.length+'</b> research assistants</span>' +
+    present.map(function(t){ return '<span><b>'+counts[t]+'</b> '+TYPES[t][counts[t]===1?0:1]+'</span>'; }).join("");
+
+  var state = { view:"compact", type:"all", q:"" };
+  var fEl = document.getElementById("ra-filter");
+  fEl.innerHTML = ["all"].concat(present).map(function(t){
+    return '<button type="button" data-f="'+t+'" aria-pressed="'+(t==="all")+'">'+(t==="all"?"All":TYPES[t][1])+'</button>'; }).join("");
+
+  function okO(o){ return (state.type==="all"||o.type===state.type) &&
+    (!state.q || (o.title+" "+o.venue+" "+o.team.map(function(id){return M[id]?M[id].name:"";}).join(" ")).toLowerCase().indexOf(state.q)>-1); }
+  function okP(p){ return !state.q || p.name.toLowerCase().indexOf(state.q)>-1; }
+  function pOuts(p){ return p.outs.filter(function(o){ return (state.type==="all"||o.type===state.type) &&
+    (!state.q || okP(p) || o.title.toLowerCase().indexOf(state.q)>-1); }); }
+  var EMPTY = '<div class="ra-empty">No matching results.</div>';
+
+  var VIEWS = {
+    compact: function(){
+      var rows = people.map(function(p){
+        var os = pOuts(p); if (!os.length && (state.type!=="all"||state.q)) return "";
+        var c = {}; os.forEach(function(o){ c[o.type]=(c[o.type]||0)+1; });
+        var chips = Object.keys(c).map(function(t){ return '<span class="ra-badge b-'+t+'">'+c[t]+' '+TYPES[t][c[t]===1?0:1]+'</span>'; }).join("");
+        return '<details class="ra-row"><summary>'+av(p,"m")+
+          '<div><div class="ra-name">'+esc(p.name)+'</div>'+(sub(p)?'<div class="ra-sub">'+sub(p)+'</div>':'')+'</div>'+
+          '<div class="ra-counts">'+(chips||'<span class="ra-status">—</span>')+'</div><span class="ra-chev">›</span></summary>'+
+          (os.length?'<ol>'+os.map(function(o){ return '<li>'+badge(o.type)+ttl(o)+(stat(o)?' <span class="ra-status">('+stat(o)+')</span>':'')+(o.venue?'<div class="ra-lect">'+esc(o.venue)+'</div>':'')+lect(o,'ra-lect')+'</li>'; }).join("")+'</ol>':'')+
+          '</details>';
+      }).join("");
+      return rows ? '<div class="ra-compact">'+rows+'</div>' : EMPTY;
+    },
+    table: function(){
+      var rows = outs.filter(okO).map(function(o,i){
+        return '<tr><td>'+(i+1)+'</td><td>'+badge(o.type)+'</td>'+
+          '<td><div class="t-title">'+ttl(o)+'</div>'+(o.venue?'<div class="t-venue">'+esc(o.venue)+'</div>':'')+'</td>'+
+          '<td><div class="ra-people">'+o.team.filter(function(id){return M[id];}).map(function(id){ return '<span class="ra-person">'+av(M[id],"s")+esc(M[id].name)+'</span>'; }).join("")+'</div>'+lect(o,'ra-lect')+'</td>'+
+          '<td class="ra-status">'+(stat(o)||'—')+'</td></tr>';
+      }).join("");
+      return rows ? '<div class="ra-tablewrap"><table class="ra-table"><thead><tr><th>#</th><th>Type</th><th>Title</th><th>Team</th><th>Status</th></tr></thead><tbody>'+rows+'</tbody></table></div>' : EMPTY;
+    },
+    cards: function(){
+      var cards = people.map(function(p){
+        var os = pOuts(p); if (!os.length && (state.type!=="all"||state.q)) return "";
+        return '<div class="card ra-card"><div class="ra-head">'+av(p,"l")+'<div><h3>'+esc(p.name)+'</h3>'+
+          (sub(p)?'<div class="ra-sub">'+sub(p)+'</div>':'')+'<div class="ra-sub">'+p.outs.length+(p.outs.length===1?' output':' outputs')+'</div></div></div>'+
+          (os.length?'<ul class="ra-list">'+os.map(function(o){ return '<li>'+badge(o.type)+'<div>'+ttl(o)+'</div>'+(stat(o)?'<div class="ra-status">'+stat(o)+'</div>':'')+(o.venue?'<div class="ra-lect">'+esc(o.venue)+'</div>':'')+lect(o,'ra-lect')+'</li>'; }).join("")+'</ul>'
+                    :'<p class="small muted">Achievements will be added.</p>')+'</div>';
+      }).join("");
+      return cards ? '<div class="ra-grid">'+cards+'</div>' : EMPTY;
+    }
+  };
+
+  function render(){ document.getElementById("ra-out").innerHTML = VIEWS[state.view](); }
+  function group(el,attr,key){ el.addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b) return;
+    [].forEach.call(el.querySelectorAll("button"),function(x){ x.setAttribute("aria-pressed",x===b); });
+    state[key]=b.getAttribute(attr); render(); }); }
+  group(document.getElementById("ra-views"),"data-v","view");
+  group(fEl,"data-f","type");
+  document.getElementById("ra-search").addEventListener("input",function(e){ state.q=e.target.value.trim().toLowerCase(); render(); });
+  render();
 })();
 </script>
 <script src="layout.js"></script>
+<footer class="site-footer"><div class="wrap"><span>© 2026 Yuita Arum Sari, Ph.D.</span><nav><a href="mailto:yuita@ub.ac.id">Email</a><a href="https://scholar.google.com/citations?user=J5gQoNcAAAAJ&amp;hl=en">Google Scholar</a><a href="https://www.scopus.com/authid/detail.uri?authorId=57189058237">Scopus</a><a href="https://sinta.kemdiktisaintek.go.id/authors/profile/6181778">SINTA</a><a href="https://id.linkedin.com/in/yuitaarumsari">LinkedIn</a><a href="https://yuita-as.github.io/code.html">Code &amp; data</a></nav></div></footer>
 </body>
 </html>
